@@ -3,12 +3,7 @@ input = sys.stdin.readline
 n = int(input())
 dp = [1]*n
 lst = []
-for i in range(n):
-  x,y=map(int,input().split())
-  if x > y:
-    lst.append([y,x])
-  else:
-    lst.append([x,y])
+lst = [sorted(list(map(int,input().split()))) for i in range(n)]
 lst.sort()
 for i in range(n):
   for j in range(i):
