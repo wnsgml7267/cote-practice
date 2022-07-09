@@ -3,7 +3,7 @@ input = sys.stdin.readline
 m = int(input())
 s = set()
 for i in range(m):
-  a = input().strip().split()
+  a = input().split()
   if len(a) == 1:
     if a[0] == "all":
       s = set([i for i in range(1,21)])
