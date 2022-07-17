@@ -12,7 +12,6 @@ for i in range(room_count):
       damage += -(a*(h//attack-1))
     else:
       damage += -(a*(h//attack))
-    ans.append(damage)
   elif t == 2: #a=용사 공격력 증가, h=용사 체력회복
     attack += a
     damage = h
