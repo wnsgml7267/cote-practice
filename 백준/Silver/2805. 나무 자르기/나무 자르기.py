@@ -1,17 +1,16 @@
 import sys
 input = sys.stdin.readline
-N, M = map(int, input().split())
-tree = list(map(int, input().split()))
-start = 1
-end = max(tree)
+n,h=map(int,input().split())
+tree = list(map(int,input().split()))
+start, end = 0, max(tree)
 while start <= end:
-  length = 0
-  height = (start+end)//2
+  mid = (start+end)//2
+  tree_get = 0
   for i in tree:
-    if i > height:
-      length += i-height
-  if length >= M:
-    start = height + 1
+    if i > mid:
+      tree_get += i-mid
+  if tree_get < h:
+    end = mid - 1
   else:
-    end = height - 1
+    start = mid + 1
 print(end)
