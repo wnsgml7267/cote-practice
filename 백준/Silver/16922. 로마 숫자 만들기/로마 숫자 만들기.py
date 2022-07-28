@@ -1,12 +1,7 @@
-from itertools import combinations_with_replacement
+from itertools import combinations_with_replacement as cb
 n = int(input())
 result = []
-numbers = [1, 5, 10, 50]
-
-for temp in combinations_with_replacement(range(4), n):
-    sum = 0
-    for i in temp:
-        sum += numbers[i]
-    result.append(sum)
-
+array = [1, 5, 10, 50]
+for temp in cb(array, n):
+    result.append(sum(temp))
 print(len(set(result)))
