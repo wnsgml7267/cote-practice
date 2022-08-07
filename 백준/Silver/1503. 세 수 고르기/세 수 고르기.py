@@ -19,7 +19,7 @@ else:
     for k in range(start, 10):
       if arr[k] == False:
         continue
-      for i in range(start, 1001):
+      for i in range(start, 33):
         if arr[i] == False:
           continue
         for j in range(start,1002):
