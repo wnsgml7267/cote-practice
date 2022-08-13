@@ -7,10 +7,8 @@ def solution(record):
         if rec[0] == "Enter":
             dic[rec[1]] = rec[2]
             ans.append([rec[1],"Enter"])
-            #answer.append("%s님이 들어왔습니다." % dic[rec[1]])
         elif rec[0] == "Leave":
             ans.append([rec[1],"Leave"])
-            #answer.append("%s님이 나갔습니다." % dic[rec[1]])
         else:
             dic[rec[1]] = rec[2]
     for i in ans:
