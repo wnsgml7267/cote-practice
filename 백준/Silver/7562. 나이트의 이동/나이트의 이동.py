@@ -9,7 +9,7 @@ for i in range(int(input())):
   end_x, end_y = map(int,input().split()) #도달할 좌표
   graph = [[0]*n for i in range(n)]
   q = deque()
-  q.append((now_x, now_y))
+  q.append([now_x, now_y])
   while q:
     x, y = q.popleft()
     if x == end_x and y == end_y:
