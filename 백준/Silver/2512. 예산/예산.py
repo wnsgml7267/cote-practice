@@ -1,15 +1,19 @@
-import sys
-input = sys.stdin.readline
 n = int(input())
-s = list(map(int, input().split()))
-m = int(input())
-low, high = 0, max(s)
-while low <= high:
-    mid = (low + high) // 2
-    num = 0
-    for i in s:
-        if i >= mid: num += mid
-        else: num += i
-    if num <= m: low = mid + 1
-    else: high = mid - 1
-print(high)
+array = list(map(int,input().split()))
+total_budget = int(input())
+start = 0
+end = max(array)
+
+while start <= end:
+  mid = (start+end)//2
+  use_budget = 0
+  for i in array:
+    if i < mid:
+      use_budget += i
+    else:
+      use_budget += mid
+  if total_budget >= use_budget:
+    start = mid + 1
+  else:
+    end = mid - 1
+print(end)
