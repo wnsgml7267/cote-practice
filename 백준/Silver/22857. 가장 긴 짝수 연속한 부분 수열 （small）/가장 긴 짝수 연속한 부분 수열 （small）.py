@@ -1,28 +1,21 @@
 import sys
 input = sys.stdin.readline
-
 n, k = map(int,input().split())
-array = list(map(int, input().split()))
+array = list(map(int,input().split()))
 
-cnt = 0
-start, end = 0, 0
-size, size_max = 0, 0
-flag = 1
-
+max_len = 0 #짝수로 이루어져 있는 연속한 부분 수열 중 가장 긴 길이를 출력한다.
 for i in range(n):
-    while cnt <= k and flag: #k만큼 삭제하기
-        if array[end] % 2: #홀수면
-            if cnt == k: #k만큼 삭제할 홀수가 나오면 break
-                break
-            cnt += 1 #홀수 개수 +1
-        size += 1 #부분 수열의 길이
-        if end == n - 1: #끝까지 돌면
-            flag = 0 # 중지
+    if array[i] % 2: #홀수면
+        continue
+    else: #짝수일 때만 시작
+        long_len = 1 #부분 수열 길이
+        hol_count = 0 #홀수 갯수
+    for j in range(i+1, n):
+        if hol_count > k:
             break
-        end += 1
-    size_max = max(size_max, size-cnt)
-    if array[i] % 2:
-        cnt -= 1
-    size -= 1
-print(size_max)
-        
+        if array[j] % 2: #홀수면
+            hol_count += 1
+        else:
+            long_len += 1
+    max_len = max(max_len, long_len)
+print(max_len)
