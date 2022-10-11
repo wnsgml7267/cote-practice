@@ -1,30 +1,24 @@
-import sys
-input = sys.stdin.readline
-N, K, M = map(int, input().split()) #김밥의 개수, 꼬다리의 길이, 김밥조각의 최소개수
-L = []
-for _ in range(N):
-    kim = int(input().rstrip())
-    if kim > K*2:
-        L.append(kim-(2*K))
-    elif kim - K > 0 and kim < 2 * K:
-        L.append(kim-K)
-
-if len(L) == 0:
+n, k, m = map(int, input().split())
+array = []
+answer = -1
+for i in range(n):
+    kimbap = int(input())
+    if kimbap > 2 * k:  #두 꼬다리
+        array.append(kimbap - 2 * k)
+    elif k < kimbap < 2 * k:  #한 꼬다리
+        array.append(kimbap - k)
+if len(array) == 0:
     print(-1)
     exit(0)
+  
+start, end = 1, max(array)
 
-P = -1
-l,r = 1,max(L)
-
-while l <= r:
-
-    m = (l+r)//2 #조각 김밥의 최대 길이
-    total = sum([i//m for i in L])
-
-    if total < M:
-        r = m-1
-    else:
-        l = m+1
-        P = m
-
-print(P)
+while start <= end:
+    mid = (start + end) // 2
+    total = sum([i//mid for i in array])
+    if total >= m:  #m개 보다 더 만들어지면
+        answer = mid
+        start = mid + 1
+    elif total < m:  #m개 보다 적으면
+        end = mid - 1
+print(answer)
