@@ -11,17 +11,16 @@ dy = (0,0,1,-1)
 answer = []
 q = deque()
 def bfs():
-    cnt = 1
+    cnt = 0
     while q:
         x, y = q.popleft()
-
+        cnt += 1
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
             if 0 <= nx < n and 0 <= ny < m and graph[nx][ny] == 1:
                 graph[nx][ny] = 0
                 q.append((nx,ny))
-                cnt += 1
     return cnt
 
 for i in range(n):
