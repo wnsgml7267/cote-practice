@@ -14,5 +14,5 @@ while start <= end:
     end = mid - 1
   else:
     start = mid + 1
-    answer = max(answer, mid)
+    answer = mid
 print(answer)
