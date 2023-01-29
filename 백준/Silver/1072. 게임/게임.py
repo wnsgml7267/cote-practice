@@ -1,16 +1,15 @@
-from math import floor
 x, y = map(int, input().split())
-percent = floor(100 * y / x) # 부동소수점 오차
+percent = y * 100 // x
 low, high = 0, 10**9
-if percent >= 99: # 확률이 99~100퍼면
-    print(-1)
+answer = 0
+while low <= high:
+    mid = (low+high)//2
+    if (y+mid) * 100 // (x+mid) > percent:
+        high = mid - 1
+        answer = mid
+    else:
+        low = mid + 1
+if answer == 0:
+    print(-1)        
 else:
-    while low <= high: # 이분 탐색
-        mid = (low + high) // 2
-        tx, ty = x + mid, y + mid
-        change_percent = floor(100 * ty / tx)
-        if  change_percent > percent: 
-            high = mid - 1
-        else: 
-            low = mid + 1
-    print(high + 1)
+    print(answer)
