@@ -11,6 +11,7 @@ public class Main {
 		/*
 		 * 1. 입력파일 읽어들이기 
 		 */
+		//System.setIn(new FileInputStream("res/17478_input1.txt"));
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 		/*
