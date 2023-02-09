@@ -23,7 +23,7 @@ public class Main {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-//		System.out.println(Arrays.toString(arr[0]));
+
 		gs(0);
 		System.out.println(mn);
 			
@@ -35,19 +35,11 @@ public class Main {
 			y = 0;
 			for(int j = 0; j < T; j++) {		
 				if(isSelected[j]) {
-					
-//					for(int k = 0; k < Arrays.toString(arr[j]).length(); k++) {
 					x *= arr[j][0];
 					y += arr[j][1];
-//						System.out.println(arr[j][0]);
-//						System.out.println(arr[j][1]);
-//						System.out.print(Arrays.toString(arr[j]));
-//					}
-//					System.out.println("차이 : " + (y-x));
 					mn = Math.min(mn, Math.abs(x-y));
 				}
 			}
-//			System.out.println();
 			return;
 		}
 		
