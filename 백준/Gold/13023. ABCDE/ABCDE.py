@@ -1,6 +1,3 @@
-import sys
-sys.setrecursionlimit(10**9)
-input = sys.stdin.readline
 n, m = map(int,input().split()) # 0 ~ n-1 사람 번호, 친구 관계 수
 answer = 0
 graph = [[] for _ in range(n)]
