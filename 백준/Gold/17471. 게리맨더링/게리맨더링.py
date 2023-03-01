@@ -28,13 +28,13 @@ for i in range(n):
     for j in range(1, arr[0]+1):
         dic[i].append(arr[j]-1)
 
-ar = [i for i in range(1, n+1)]
+ar = [i for i in range(n)]
 
 for i in range(1, n//2+1):
     comb = list(cb(range(n), i))
     for co in comb:
         s, z = bfs(co)
-        ss, zz = bfs([i for i in range(n) if i not in co])
+        ss, zz = bfs(list(set(ar) - set(co)))
         if z + zz == n:
             result = min(result, abs(s - ss))
 if result != float('inf'):
