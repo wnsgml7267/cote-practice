@@ -1,13 +1,8 @@
-customer_cnt, city_cnt = map(int,input().split()) # 필요한 고객 수, 도시 수
-
-city_arr = []
-for city in range(city_cnt):
-    city_arr.append(list(map(int,input().split())))
-city_arr.sort()
-
-dp = [10**9] * (customer_cnt + 100) # 고객과 비용은 최대 100 이하
+necessary_customer_cnt, city_cnt = map(int,input().split()) # 필요한 고객 수, 도시 수
+city_arr = [list(map(int,input().split())) for _ in range(city_cnt)] # 인덱스 0 : 비용, 인덱스 1 : 고객
+dp = [10**9] * (necessary_customer_cnt + 100)
 dp[0] = 0
-for cost, man in city_arr:
-    for i in range(man, customer_cnt + 100):
+for i in range(necessary_customer_cnt + 100):
+    for cost, man in city_arr:
         dp[i] = min(dp[i-man] + cost, dp[i])
-print(min(dp[customer_cnt:]))
+print(min(dp[necessary_customer_cnt:]))
