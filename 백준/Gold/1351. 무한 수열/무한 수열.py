@@ -1,10 +1,8 @@
 n, p, q = map(int,input().split())
-dict = {0:1}
-
-def A(n):    
-    if n in dict:
-        return dict[n]
-    
-    dict[n] = A(n//p) + A(n//q)
-    return dict[n]
-print(A(n))
+A = {0:1}
+def result(n):
+    if n in A:
+        return A[n]
+    A[n] = result(n//p) + result(n//q)
+    return A[n]
+print(result(n))
