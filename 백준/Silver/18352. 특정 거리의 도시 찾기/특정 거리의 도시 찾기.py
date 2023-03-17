@@ -1,34 +1,27 @@
-from collections import deque
 import sys
+from collections import deque
 input = sys.stdin.readline
-
-n,m,k,x = map(int,input().split())
-
-answer = []
+n, m, k, x = map(int, input().split())
 graph = [[] for _ in range(n+1)]
-visited = [-1 for _ in range(n+1)]
-
+visited = [0] * (n+1)
 for i in range(m):
-    a, b = map(int,input().split())
-    graph[a].append(b)
-
+  a, b = map(int,input().split())
+  graph[a].append(b)
 q = deque()
+visited[x] = 1
 q.append(x)
-visited[x] = 0
-
+answer = []
 while q:
-    x = q.popleft()
-    for i in graph[x]:
-        if visited[i] == -1:
-            visited[i] = visited[x] + 1
-            q.append(i)
-
-for i in range(1,n+1):
-    if visited[i] == k:
-        answer.append(i)
-
-if len(answer) == 0:
-    print(-1)
+  x = q.popleft()
+  for num in graph[x]:
+    if not visited[num]:
+      visited[num] = visited[x]+1
+      if visited[num] == k+1:
+        answer.append(num)
+      q.append(num)
+if len(answer) != 0:
+  answer.sort()
+  for i in answer:
+    print(i)
 else:
-    for i in answer:
-        print(i)
+  print(-1)
