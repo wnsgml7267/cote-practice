@@ -16,12 +16,12 @@ else:
       break
     # 곱하기
     nx = x**2
-    if 0 <= nx <= t**2 and visited[nx] == "" and s != nx:
+    if 0 <= nx <= t and visited[nx] == "" and s != nx:
       visited[nx] = visited[x] + "*"
       q.append(nx)
 
     nx = x*2
-    if 0 <= nx <= t**2 and visited[nx] == "" and s != nx:
+    if 0 <= nx <= t and visited[nx] == "" and s != nx:
       visited[nx] = visited[x] + "+"
       q.append(nx)
     
