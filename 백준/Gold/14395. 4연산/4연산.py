@@ -30,10 +30,10 @@ else:
       visited[nx] = visited[x] + "-"
       q.append(nx)
 
-    if x != 0:
-        nx = 1
-        if visited[nx] == "" and s != nx:
-            visited[nx] = visited[x] + "/"
-            q.append(nx)
+
+    nx = 1
+    if visited[nx] == "" and s != nx:
+      visited[nx] = visited[x] + "/"
+      q.append(nx)
 
   print(answer)
