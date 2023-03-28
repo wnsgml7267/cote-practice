@@ -3,24 +3,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new  BufferedReader(new InputStreamReader(System.in));
-		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		
-		int K = N > 3 ? N+1 : 4;
-		int[] arr = new int[K];
-		arr[2] = 1;
-		arr[3] = 1;
+		int M = N+1;
+		if(N < 6) M = 6;
 		
-		for(int i = 4 ; i <= N ; i++) {
-			int min = arr[i-1];
-			if(i%2 == 0) min = min > arr[i/2] ? arr[i/2] : min;
-			if(i%3 == 0) min = min > arr[i/3] ? arr[i/3] : min;
+		int[] array = new int[M];
+		array[2] = 1;	//-1, %2
+		array[3] = 1;	//%3
+		array[4] = 2;	//%2%2
+		array[5] = 3;	//-1%2%2, -1-1%3
+		
+		for(int i = 6 ; i <= N ; i++) {
+			int n1 = Integer.MAX_VALUE;
+			if(i%3 == 0) n1 = array[i/3];
 			
-			arr[i] = min+1;
+			int n2 = Integer.MAX_VALUE;
+			if(i%2 == 0) n2 = array[i/2];
+			
+			int n3 = array[i-1];	//-1
+			
+			n1 = Math.min(n1, n2);
+			n1 = Math.min(n1, n3);
+			
+			array[i] = n1+1;
 		}
-		System.out.println(arr[N]);
+		
+		
+		
+		System.out.println(array[N]);
 	}
+	
 }
