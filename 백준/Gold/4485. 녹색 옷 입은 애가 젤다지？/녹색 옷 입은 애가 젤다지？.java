@@ -1,0 +1,78 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Main {
+	static int N, map[][];
+	static int[] dr = {-1,1,0,0};
+	static int[] dc = {0,0,-1,1};
+	static int cnt = 1;
+	public static void main(String[] args) throws Exception{
+//		System.setIn(new FileInputStream("res/input_1249.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(true){
+			N = Integer.parseInt(br.readLine());
+			if (N == 0) break;
+			map = new int[N][N];
+			
+			for(int i = 0; i < N; i++) {
+				String[] split = br.readLine().split(" ");
+				for(int j = 0; j < N; j++) {
+					map[i][j] = Integer.parseInt(split[j]);
+				}
+			}
+			
+			System.out.println("Problem " + cnt++ +": " + dijkstra());
+			
+		}
+	
+	}
+	private static int dijkstra() {
+		final int INF = Integer.MAX_VALUE;
+		int[][] minTime = new int[N][N]; // 출방 정점에서 자신까지 이르는 최소 복구시간
+		boolean[][] visited = new boolean[N][N];
+		PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]>() { // r,c,출발지에서 자신까지의 최ㅓㅅ용
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				return Integer.compare(o1[2], o2[2]);
+			}
+		});
+		
+		for(int i =0; i < N; i++) {
+			for(int j =0; j < N;j++) {
+				minTime[i][j] = INF;
+			}
+		}
+		minTime[0][0] = map[0][0];
+		pq.offer(new int[] {0,0,minTime[0][0]});
+		
+		int[] cur = null;
+		int r,c,minCost;
+		while(true) {
+			
+			// step 1
+			cur = pq.poll();
+			r = cur[0];
+			c = cur[1];
+			minCost = cur[2];
+			
+			if(visited[r][c]) continue; // 큐에 남아있는 잔재
+			visited[r][c] = true;
+			if(r == N-1 && c == N-1) return minCost; // 도착지에 오면 끝내기
+			// step 2
+			int nr=0, nc=0;
+			for( int d = 0; d < 4 ;d++) {
+				nr = r + dr[d];
+				nc = c + dc[d];
+				if(nr >= 0 && nr < N && nc >= 0 && nc < N && !visited[nr][nc]
+					&& minTime[nr][nc] > minCost + map[nr][nc]) {
+						minTime[nr][nc] = minCost + map[nr][nc];
+						pq.offer(new int[] {nr, nc, minTime[nr][nc]});
+					}
+			}
+		}
+	}
+}
