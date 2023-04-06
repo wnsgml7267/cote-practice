@@ -10,8 +10,5 @@ def dfs(string):
 
 n = input()
 answer = 0
-if len(n) == 1:
-  answer += 1
-else:
-  dfs(n)
+dfs(n)
 print(answer)
