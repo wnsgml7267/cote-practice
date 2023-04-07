@@ -1,64 +1,69 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 	static int N;
 	static int M;
-	static int[][] arr;
-	static int sm;
-	static int x1;
-	static int x2;
-	static int y1;
-	static int y2;
-	static int[] answer;
-	static int cnt;
+	static int[][] tree;
 	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st=new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 		
-		N = Integer.parseInt(st.nextToken()); // 표의 크기
-		M = Integer.parseInt(st.nextToken()); // 합을 구해야 하는 횟수
-		arr = new int[N][N];
-		answer = new int[M];
-//		sm = 0; // 누적 합
 		
-		for(int i = 0; i < N; i++) {
-			StringTokenizer st2 = new StringTokenizer(br.readLine());
-			sm = 0;
-			for(int j = 0; j < N; j++) {
-				arr[i][j] = sm + Integer.parseInt(st2.nextToken());
-				sm = arr[i][j];
+		int[][] arr = new int[N+1][N+1];
+		// 펜윅 트리
+		tree = new int[N+1][N+1];
+		// 수 N개 입력받기
+		for(int i = 1; i <= N; i++) {
+			st = new StringTokenizer(br.readLine());
+			for(int j = 1; j <= N; j++) {
+				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
 		
-//		System.out.println(Arrays.deepToString(arr));
+		// 펜윅 트리 구성하기
+		for(int i = 1; i <= N; i++) {
+			for(int j = 1; j <= N; j++) {
+				update(i, j, arr[i][j]);
+			}
+		}
 
-		for(int i = 0; i < M; i++) {
-			StringTokenizer st3 = new StringTokenizer(br.readLine());
-			x1 = Integer.parseInt(st3.nextToken());
-			y1 = Integer.parseInt(st3.nextToken());
-			x2 = Integer.parseInt(st3.nextToken());
-			y2 = Integer.parseInt(st3.nextToken());
-			cnt = 0;
-			// x1좌표 부터 ~ x2좌표까지
-			for (int j = 0; j < x2 - x1 + 1; j++) {
-				if (y1 == 1) cnt += arr[x1-1+j][y2-1];
-				else cnt += arr[x1-1+j][y2-1] - arr[x1-1+j][y1-2];
-//				System.out.println(cnt);
-			}
-			//x1 or x2 가 1이면
-			answer[i] = cnt;
-			
-		}
-		for(int fd : answer) {
-			System.out.println(fd);
-		}
-//		x1 -= 1;
-//		y1 = N;	
 		
-		// start가 1번 일 때와, start == end 일 때 예외처리 해줄 것.
-		// x1, y1
+		for(int i = 0; i < M; i++) {
+			st=new StringTokenizer(br.readLine());
+			int x1 = Integer.parseInt(st.nextToken());
+			int y1 = Integer.parseInt(st.nextToken());
+			int x2 = Integer.parseInt(st.nextToken());
+			int y2 = Integer.parseInt(st.nextToken());
+			System.out.println(sum(tree, x2, y2) - sum(tree, x1-1, y2) - sum(tree, x2, y1-1) + sum(tree, x1-1, y1-1));
+		}
 	}
+
+	public static int sum(int[][] tree, int idx_x, int idx_y) {
+		int sol = 0;
+		while(idx_x>0) {
+			int temp_idx_y = idx_y;
+			while(temp_idx_y>0) {
+				sol += tree[idx_x][temp_idx_y];
+				temp_idx_y -= (temp_idx_y&-temp_idx_y);
+			}
+			idx_x -= (idx_x&-idx_x);
+		}
+		return sol;
+	}
+
+	public static void update(int idx_x, int idx_y, int diff) {
+		while(idx_x<tree.length) {
+			int temp_idx_y = idx_y;
+			while(temp_idx_y<tree[idx_x].length) {
+				tree[idx_x][temp_idx_y] += diff;
+				temp_idx_y += (temp_idx_y&-temp_idx_y);
+			}
+			idx_x += (idx_x&-idx_x);
+		}
+	}
+	
 }
