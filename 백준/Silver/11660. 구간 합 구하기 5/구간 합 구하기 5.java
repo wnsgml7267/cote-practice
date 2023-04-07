@@ -31,39 +31,37 @@ public class Main {
 			}
 		}
 
-		
 		for(int i = 0; i < M; i++) {
 			st=new StringTokenizer(br.readLine());
 			int x1 = Integer.parseInt(st.nextToken());
 			int y1 = Integer.parseInt(st.nextToken());
 			int x2 = Integer.parseInt(st.nextToken());
 			int y2 = Integer.parseInt(st.nextToken());
-			System.out.println(sum(tree, x2, y2) - sum(tree, x1-1, y2) - sum(tree, x2, y1-1) + sum(tree, x1-1, y1-1));
+			System.out.println(sum(x2, y2) - sum(x1-1, y2) - sum(x2, y1-1) + sum(x1-1, y1-1));
 		}
 	}
 
-	public static int sum(int[][] tree, int idx_x, int idx_y) {
+	public static int sum(int i, int j) {
 		int sol = 0;
-		while(idx_x>0) {
-			int temp_idx_y = idx_y;
-			while(temp_idx_y>0) {
-				sol += tree[idx_x][temp_idx_y];
-				temp_idx_y -= (temp_idx_y&-temp_idx_y);
+		while(i > 0) {
+			int k = j;
+			while(k > 0) {
+				sol += tree[i][k];
+				k -= (k & -k);
 			}
-			idx_x -= (idx_x&-idx_x);
+			i -= (i & -i);
 		}
 		return sol;
 	}
 
-	public static void update(int idx_x, int idx_y, int diff) {
-		while(idx_x<tree.length) {
-			int temp_idx_y = idx_y;
-			while(temp_idx_y<tree[idx_x].length) {
-				tree[idx_x][temp_idx_y] += diff;
-				temp_idx_y += (temp_idx_y&-temp_idx_y);
+	public static void update(int i, int j, int diff) {
+		while(i<tree.length) {
+			int k = j;
+			while(k < tree[i].length) {
+				tree[i][k] += diff;
+				k += (k & -k);
 			}
-			idx_x += (idx_x&-idx_x);
+			i += (i & -i);
 		}
 	}
-	
 }
