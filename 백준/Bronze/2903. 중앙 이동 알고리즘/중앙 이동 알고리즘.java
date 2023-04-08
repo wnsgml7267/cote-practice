@@ -9,7 +9,7 @@ public class Main{
         arr[0] = 4;
         int two = 2;
         int one = 1;
-        int cnt = 0;
+        int cnt;
         for(int i=1;i<16;i++){
             two += one;
             cnt = two * two;
