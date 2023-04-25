@@ -4,7 +4,7 @@ def solution(numbers):
     dic = dd(list)
     num_arr = []
     for num in numbers:
-        dic[str(num)[0]].append([int((str(num)*5)[:4]), str(num)])
+        dic[str(num)[0]].append([int((str(num)*4)[:4]), str(num)])
             
     for i in dic.keys():
         num_arr.append(i)
@@ -14,5 +14,4 @@ def solution(numbers):
     for i in num_arr:
         for j in dic[i]:
             answer += j[1]
-    # 10 1000 31 311 34 343 34 345
     return str(int(answer))
