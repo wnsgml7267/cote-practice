@@ -5,7 +5,6 @@ arr = []
 result = 0
 for i in range(n):
     arr.append(int(input()))
-arr.sort()
 start = 0
 end = min(arr) * m # arr의 최솟값 * m : 가장 많은 시간이 걸림
 # end = 10**18 
