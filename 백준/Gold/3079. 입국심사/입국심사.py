@@ -7,7 +7,8 @@ for i in range(n):
     arr.append(int(input()))
 arr.sort()
 start = 0
-end = 10**18 # arr의 최솟값 * m : 가장 많은 시간이 걸림
+end = min(arr) * m
+# end = 10**18 # arr의 최솟값 * m : 가장 많은 시간이 걸림
 while start <= end:
     mid = (start + end) // 2 # 시간의 최솟값
 
