@@ -15,6 +15,4 @@ for i in range(int(input())):
     if right and -left[0] > right[0]:
         heappush(right, -heappop(left))
         heappush(left, -heappop(right))
-    answer.append(-left[0])
-for i in answer:
-    print(i)
+    print(-left[0])
